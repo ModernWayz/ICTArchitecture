@@ -1,37 +1,33 @@
-## Welcome to GitHub Pages
+## Analyse en architectuur
+# Samenvatting(bare minimum)
 
-You can use the [editor on GitHub](https://github.com/ModernWayz/ICTArchitecture/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Er word door onze klant gevraagd om een platform te ontwikkelen waarbij gebruikers verschillende afbeeldingen kunnen uploaden en deze worden omgezet naar een GIF (Graphics Interchange Format) bestand. Dit bestand wordt getoond en kan ook door de gebruiker worden opgeslagen op zijn eigen computer (downloaden).  Gebruikers kunnen het GIF bestand nog altijd opvragen via een URL dat 1 dag geldig is, hierna kan het GIF bestand niet meer opgevraagd worden.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# Technische aspecten(bare minimum)
 
-### Markdown
+Om dit platform te realiseren zullen we gebruik maken van een API om zowel de bestanden te uploaden als deze om te vormen tot een GIF. Na het omvormen van de afbeeldingen tot een GIF zal dit bestand tijdelijk worden opgeslagen in een databank. De originele afbeeldingen opslaan lijkt een overbodige functie.
+Nadat de geldigheidsperiode van 1 dag is verstreken worden alle gerelateerde bestanden (bestanden die dus ouder zijn dan 1 dag) verwijdert worden.
+Om er voor te zorgen dat enkel geauthentiseerde gebruikers toegang hebben tot het maken van GIF bestanden zal er ook een login voorzien worden.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+# Architectuur
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ModernWayz/ICTArchitecture/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+
+
+# Verantwoording keuzes
+**EC2**: Elastic Compute Cloud zal gebruikt worden voor de virtuele server. Deze service van Amazon heeft als voordeel dat de gebruikte middelen zeer snel kunnen worden aangepast. Hierdoor zal er altijd genoeg opslag en rekenkracht zijn maar nooit te veel. Ook een beschikbaarheidsgraad van 99.99% is een troef om het platform altijd online te houden.
+
+**Cognito**: Om de identiteit van gebruikers te confirmeren zullen we gebruik maken van Amazon Cognito. Deze service zorgt voor een simpele implementatie van authenticatie d.m.v. veel gebruikte sociale media platformen zoals Google of Meta.  
+
+**RDS**: Amazon RDS wordt gebruikt om onze relationele databank te beheren. Deze service heeft een zeer lage kost die zich aanpast aan gebruikte opslag. Deze opslag wordt ook automatisch opgeschaald. Het is veilig vanwege de mogelijkheid om het binnen onze eigen virtuele server te draaien en dus enkel hierbinnen deze kunnen bereiken.
+
+**S3**: Een S3 (Simple Storage Service) bucket zal gebruikt worden om de GIF bestanden te uploaden naar de database

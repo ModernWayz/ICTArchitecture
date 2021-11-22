@@ -13,14 +13,8 @@ Om er voor te zorgen dat enkel geauthentiseerde gebruikers toegang hebben tot he
 
 # Architectuur
 
-
-
-
-
-
-
-
-
+<img src ="C:\Users\stijn\Desktop\OCD @ NICK\ICTArchitecture\ICT-archi-flow-diagram.png"> 
+</img>
 
 
 # Verantwoording keuzes

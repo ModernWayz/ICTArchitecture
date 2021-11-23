@@ -3,9 +3,9 @@ const AWS = require('aws-sdk');
 const EXPIRE_SECONDS_ONE_YEAR = 31556926;
 
 const s3 = new AWS.S3({
-    accessKeyId: "ASIAVRXZQG5ZCV2XIWEF",
-    secretAccessKey: "cTUI7M20Evt5Blo54jQXSVCTLjqzbtIlgTI6fpk3",
-    sessionToken: "FwoGZXIvYXdzECwaDA3foTSdUyAzDEIKJiLNAaWw5XR8HpSa16JbOGeEMmBfZqM0beB6z6vUgsK6hq+l9ugar9Kt4m8WybC1moDRDhbLn0WmBSb/1GXFiIAiP4jZb/rIn1SBeIXWb+7rMUW2m0jJ68bZT2uqZdxgpzLTX3Ho/m1bJwvpxPQwYPXr+yhq8OqieG+VpBEXhqIeQ9rHp6qTLqLJMCUv6wBfZK4xHxcjsJ+DhUp1qLiFlJX0jouaJFAAaB0j5Ktx5ZwmArS8U6CwOsFX/yJvXU0AI2ZS4j+U3/VieP2lcbDcrxco+YLejAYyLZ6373MvuCs6kGDJv15IwhRhVAprotb8NmFzTniS6Y17tmtyyOgex0aMEJWUug=="
+    accessKeyId: "ASIAVRXZQG5ZKGTFWKMH",
+    secretAccessKey: "Mc3/DQiD6Wz6OgOIG/TbekPta60GW6Gncik+YlD4",
+    sessionToken: "FwoGZXIvYXdzEIv//////////wEaDBboqLinehZyxtY+LCLNATi7POYiGQKxI6azht0acyQGH3eRe9GUejC9sMB2iXBzV/y/D2I5joayuOLWF/d83kQHNq4F75UZJFsudAQl+aj2iFxIytjjmrUDGqrCUdi893r1kUw9Bbu3eztXkYTppny6+t7+B7VEuj9+oaTQrgtnmfe+O7WVeByYSNTuA9u/NlazhTELTavApfcqHILGFSdgGYjN4EbPW+z93p1eldH1c2OcFSS/JxGv4fZ0K+/cw6MfzWdktgDvYd95pkW0fwizX42l7l87LF7N8GUo7PfyjAYyLb0IMFaOA+mke1YHtEwpqiYo1b13ZIO26dNUfZyva91+HTYtA02LhCnxZnVsFA=="
 });
 
 let url = ""
@@ -37,7 +37,7 @@ exports.uploadFile = async (fileName, key) => {
         if(err) {
             throw err;
         }
-        return data;
+        return true;
     })
 
 };

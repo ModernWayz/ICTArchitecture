@@ -1,43 +1,33 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
-const EXPIRE_SECONDS_ONE_YEAR = 31556926;
+const bucket = "ictarchitectuur"
+const clean = require('./cleanDirectory.js')
 
 const s3 = new AWS.S3({
-    accessKeyId: "ASIAVRXZQG5ZKGTFWKMH",
-    secretAccessKey: "Mc3/DQiD6Wz6OgOIG/TbekPta60GW6Gncik+YlD4",
-    sessionToken: "FwoGZXIvYXdzEIv//////////wEaDBboqLinehZyxtY+LCLNATi7POYiGQKxI6azht0acyQGH3eRe9GUejC9sMB2iXBzV/y/D2I5joayuOLWF/d83kQHNq4F75UZJFsudAQl+aj2iFxIytjjmrUDGqrCUdi893r1kUw9Bbu3eztXkYTppny6+t7+B7VEuj9+oaTQrgtnmfe+O7WVeByYSNTuA9u/NlazhTELTavApfcqHILGFSdgGYjN4EbPW+z93p1eldH1c2OcFSS/JxGv4fZ0K+/cw6MfzWdktgDvYd95pkW0fwizX42l7l87LF7N8GUo7PfyjAYyLb0IMFaOA+mke1YHtEwpqiYo1b13ZIO26dNUfZyva91+HTYtA02LhCnxZnVsFA=="
-});
+    accessKeyId: "ASIAVRXZQG5ZNQ6YWUGD",
+    secretAccessKey: "KueqzUo+pW9jby0ii5AGyEmKY4DqkfF7WVbQ4USs",
+    sessionToken: "FwoGZXIvYXdzEH4aDBG/4E7s645voVnigSLNAcf7nm/6lnYlrPzh7GiOROobGrOxvhic50NvZh5abPKv9Hpe9Im8DNJmSGBRl8JCk3bXhKPdiQPQr58rWoOkwyqzqI4ooPuLd9NMFNKYgm/azBJ5F9bJnGcNqLta68+QLFm4lnj11RdNIvTFrOLeoypgopflOuApbyTuMtD2LeuWTzpNQcx/On6g5eZpgx4ehgKi8Kl9D042Uor1cObMBa3msjQd/x3exSjO5dDFkohXYiFuTM8DVm+voirqNCz4Fb7uDCqQ11+wcZSouTUospeojQYyLbiPFFtN0+CTkK5XlWahFKSDm07tKlOWbCLIAxcJW+7yDDXdIyyveKrhIlCMbA=="});
 
-let url = ""
-
-exports.uploadFile = async (fileName, key) => {
+    // Uploading files to the bucket
+exports.uploadFile = async (fileName, key, sub) => {
+    // recursive function to empty image directory of user
+    await clean.emptyS3Directory(bucket, sub, s3)
     // Read content from the file
     const fileContent = fs.readFileSync(fileName);
 
     // Setting up S3 upload parameters
     const params = {
-        Bucket: "ictarchitectuur",
-        Key: key, // File name you want to save as in S3
+        Bucket: bucket,
+        Key: `${sub}/${key}`, // File name you want to save as in S3
         Body: fileContent
     };
 
-    // Uploading files to the bucket
     await s3.upload(params, (err, data) => {
         if (err) {
             throw err;
         }
-        url = data.Location
     });
     // Retrieve presigned url
-    await s3.getSignedUrl('getObject', {
-        Bucket: "ictarchitectuur",
-        Key: key,
-        Expires: EXPIRE_SECONDS_ONE_YEAR
-    }, (err, data) =>  {
-        if(err) {
-            throw err;
-        }
-        return true;
-    })
+    return true
 
 };

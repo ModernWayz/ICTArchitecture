@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const { v4: uuidv4 } = require('uuid');
 const convertapi = require('convertapi')('n2QH0QA4agOZTghF');
 
 app.use(bodyParser.json());
@@ -10,7 +9,8 @@ const port = 3000;
 
 const upload = require("./upload.js");
 const security = require("./security.js");
-let sub = "test";
+const {EB} = require("./uploadEvent");
+
 let JWT = "";
 let RefreshToken = "";
 
@@ -19,13 +19,10 @@ app.get("/", (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
-  const urlArray = ['https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png',
-    'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg']
-  convertapi.convert('gif', {
-    Files: urlArray
-  }, 'png').then(function(result) {
-   console.log(result.response);
-  });
+  const email = req.body.email;
+  const password = req.body.password;
+  const response = await security.registerUser(email, password);
+  res.send(response)
 });
 
 app.post("/login", (req, res) => {
@@ -47,9 +44,8 @@ app.post("/upload", async (req, res) => {
     form.parse(req, async (err, fields, files) => {
       for (const [key, value] of Object.entries(files)) {
         await upload.uploadFile(value[0].path, value[0].originalFilename, sub).catch((err) => {res.send(err)})
-
       }
-      res.send("images uploaded")
+      res.send("e")
     })
   }
   else {

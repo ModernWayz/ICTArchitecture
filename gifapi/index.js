@@ -10,12 +10,16 @@ const port = 3000;
 const upload = require("./upload.js");
 const security = require("./security.js");
 const {EB} = require("./uploadEvent");
+const https = require('https'); // or 'https' for https:// URLs
+const fs = require('fs');
 
 let JWT = "";
 let RefreshToken = "";
+let sub = "";
 
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  download('https://v2.convertapi.com/d/2wbcmr9kbyhyglihlszkcbalm3z5g3ze/FAM%20banner%20o.gif', './',console.log('succ'))
+  res.send('suc')
 });
 
 app.post("/signup", async (req, res) => {
@@ -45,7 +49,7 @@ app.post("/upload", async (req, res) => {
       for (const [key, value] of Object.entries(files)) {
         await upload.uploadFile(value[0].path, value[0].originalFilename, sub).catch((err) => {res.send(err)})
       }
-      res.send("e")
+      res.send(EB(sub))
     })
   }
   else {

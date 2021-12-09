@@ -41,7 +41,6 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/upload", async (req, res) => {
-  const urlArray = [];
   const validation = await security.validateToken(JWT).catch((err) => err)
   if (validation === "Valid Token.") {
     let form = new multiparty.Form();

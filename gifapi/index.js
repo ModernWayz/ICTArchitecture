@@ -12,6 +12,7 @@ const security = require("./security.js");
 const {EB} = require("./uploadEvent");
 const https = require('https'); // or 'https' for https:// URLs
 const fs = require('fs');
+const {downloadGifs} = require("./download");
 
 let JWT = "";
 let RefreshToken = "";
@@ -20,6 +21,18 @@ let sub = "";
 app.get("/", (req, res) => {
   download('https://v2.convertapi.com/d/2wbcmr9kbyhyglihlszkcbalm3z5g3ze/FAM%20banner%20o.gif', './',console.log('succ'))
   res.send('suc')
+});
+
+app.get("/myGifs", async (req, res) => {
+  const validation = await security.validateToken(JWT).catch((err) => err)
+  if (validation === "Valid Token.") {
+    const gifs = await downloadGifs(sub)
+    res.send(gifs)
+  }
+  else{
+    res.send("session expired, please relog")
+  }
+
 });
 
 app.post("/signup", async (req, res) => {
@@ -36,7 +49,7 @@ app.post("/login", (req, res) => {
     JWT = e.accessToken.jwtToken;
     RefreshToken = e.refreshToken.token
     sub = e.idToken.payload.sub
-    res.send(sub)
+    res.send('logged in !')
   });
 });
 
@@ -48,7 +61,8 @@ app.post("/upload", async (req, res) => {
       for (const [key, value] of Object.entries(files)) {
         await upload.uploadFile(value[0].path, value[0].originalFilename, sub).catch((err) => {res.send(err)})
       }
-      res.send(EB(sub))
+      EB(sub)
+      res.send('succesfully uploaded!')
     })
   }
   else {

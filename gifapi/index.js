@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const convertapi = require('convertapi')('n2QH0QA4agOZTghF');
 
 app.use(bodyParser.json());
 const multiparty = require('multiparty');
@@ -10,8 +9,7 @@ const port = 3000;
 const upload = require("./upload.js");
 const security = require("./security.js");
 const {EB} = require("./uploadEvent");
-const https = require('https'); // or 'https' for https:// URLs
-const fs = require('fs');
+
 const {downloadGifs} = require("./download");
 
 let JWT = "";
@@ -19,8 +17,7 @@ let RefreshToken = "";
 let sub = "";
 
 app.get("/", (req, res) => {
-  download('https://v2.convertapi.com/d/2wbcmr9kbyhyglihlszkcbalm3z5g3ze/FAM%20banner%20o.gif', './',console.log('succ'))
-  res.send('suc')
+  res.send("hello world")
 });
 
 app.get("/myGifs", async (req, res) => {

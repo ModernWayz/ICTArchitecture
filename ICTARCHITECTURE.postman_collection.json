@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "c9102d14-c0b2-481a-95e5-c2ac0f4cf7a1",
+		"name": "ICTARCHITECTURE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "eeo",
+							"type": "file",
+							"src": "/C:/Users/IT-Nerd/Desktop/images/Finished/jailfree.png"
+						},
+						{
+							"key": "yp",
+							"type": "file",
+							"src": "/C:/Users/IT-Nerd/Desktop/images/Finished/Untitleddd.png"
+						},
+						{
+							"key": "pl",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						},
+						{
+							"key": "i",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"DemoMail@Gmail.com\",\r\n    \"password\":\"Demo123.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"DemoMail@Gmail.com\",\r\n    \"password\":\"Demo123.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get gifs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/myGifs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"myGifs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

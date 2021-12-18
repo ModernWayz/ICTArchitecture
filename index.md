@@ -15,6 +15,23 @@ Om er voor te zorgen dat enkel geauthentiseerde gebruikers toegang hebben tot he
 
 ![ddddd!](images/ICT-archi-flow-diagram.png)
 
+Er zijn 4 handelingen die worden uitgevoerd vanuit de postman client naar de AWS cloud.
+
+## 1. Register
+Als er wordt geregistreerd sturen we deze gegevens naar de Amazon EC2 API die vervolgens de nieuwe gebruiker gaat registreren via Cognito. Wij confirmen dan deze gebruiker zijn emailadres. 
+
+## 2. Login
+Na dat de registratie succesvol is kunnen we ook inloggen met de Amazon EC2 API. Cognito maakt een JSON Web Token (JWT) aan en koppelt deze aan de gebruiker.
+
+## 3. Upload
+Om dit proces te kunnen starten moet je ingelogd zijn. Eerst wordt de JWT gevalideerd met de EC2 API en Cognito. Vervolgens uploaden we de afbeeldingen naar de S3 bucket en triggeren we een AWS lambda functie,
+deze lambda functie gaat de afbeeldingen in kwestie ophalen in de bucket en er een gif van genereren. Na dat de gif is genereerd zal de metadata (naam, sub,..) ervan ook worden opgeslagen in de MySQL database (RDS).
+
+## 4. Get gifs
+Als default wanneer je ingelogd bent gaan we de gebruiker zijn/haar gemaakte gifs ophalen om te displayen. Dit gebeurt ook weer op dezelfde manier via EC2 API en Cognito waar de JWT wordt gevalideerd. Hierna halen we de gif bestanden op aan de hand van de gebruiker zijn sub in de S3 bucket.
+
+## AWS Cloud
+De cloud zelf heeft ook 1 lambda functie die wordt uitgevoerd elke 12 uur. De functie gaat in de RDS database de metadata checken of er gifs zijn die ouder zijn dan 24 uur. Als dit het geval is gaat de lambda deze gifs deleten uit de S3 bucket.
 
 # Verantwoording keuzes
 **EC2**: Elastic Compute Cloud zal gebruikt worden voor de virtuele server. Deze service van Amazon heeft als voordeel dat de gebruikte middelen zeer snel kunnen worden aangepast. Hierdoor zal er altijd genoeg opslag en rekenkracht zijn maar nooit te veel. Ook een beschikbaarheidsgraad van 99.99% is een troef om het platform altijd online te houden.

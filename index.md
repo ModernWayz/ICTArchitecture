@@ -13,7 +13,7 @@ Om er voor te zorgen dat enkel geauthentiseerde gebruikers toegang hebben tot he
 
 # Architectuur
 
-![ddddd!](images/ICT-archi-flow-diagram.png)
+![ICT_Architecture_Diagram!](images/Diagram_ICTArchitectuur.png)
 
 Er zijn 4 handelingen die worden uitgevoerd vanuit de postman client naar de AWS cloud.
 

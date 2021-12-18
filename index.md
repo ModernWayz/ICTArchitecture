@@ -25,7 +25,7 @@ Na dat de registratie succesvol is kunnen we ook inloggen met de Amazon EC2 API.
 
 ## 3. Upload
 Om dit proces te kunnen starten moet je ingelogd zijn. Eerst wordt de JWT gevalideerd met de EC2 API en Cognito. Vervolgens uploaden we de afbeeldingen naar de S3 bucket en triggeren we een AWS lambda functie,
-deze lambda functie gaat de afbeeldingen in kwestie ophalen in de bucket en er een gif van genereren. Na dat de gif is genereerd zal de metadata (naam, sub,..) ervan ook worden opgeslagen in de MySQL database (RDS).
+deze lambda functie gaat de afbeeldingen in kwestie ophalen in de bucket en er een gif van genereren. Na dat de gif is gegenereerd zal de metadata (naam, sub,..) ervan ook worden opgeslagen in de MySQL database (RDS).
 
 ## 4. Get gifs
 Als default wanneer je ingelogd bent gaan we de gebruiker zijn/haar gemaakte gifs ophalen om te displayen. Dit gebeurt ook weer op dezelfde manier via EC2 API en Cognito waar de JWT wordt gevalideerd. Hierna halen we de gif bestanden op aan de hand van de gebruiker zijn sub in de S3 bucket.
